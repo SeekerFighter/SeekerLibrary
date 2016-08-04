@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="@dimen/warnDialogWidth"
+    android:layout_height="wrap_content"
+    android:background="@drawable/background_round_corner"
+    android:padding="@dimen/padding">
+
+    <TextView
+        android:id="@id/warnDialogTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/margin"
+        android:text="提示"
+        android:textSize="@dimen/dim16sp"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@id/warnDialogContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minWidth="@dimen/warnDialogWidth"
+        android:layout_below="@+id/warnDialogTitle"
+        android:layout_weight="1"
+        android:textColor="@color/textColor"
+        android:textSize="@dimen/dim15sp"
+        android:lineSpacingExtra="2dp"
+        android:text="这就是自定义的DialogFragment！简约而不失优雅。"
+        android:gravity="center"/>
+
+    <Button
+        android:id="@id/warnDialogNegativeBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/warnDialogContent"
+        android:padding="5dp"
+        android:textColor="@color/textColor"
+        android:text="取 消"
+        android:layout_toLeftOf="@+id/warnDialogPositiveBtn"
+        android:layout_marginTop="@dimen/margin"
+        android:textSize="@dimen/dim15sp"
+        android:background="@drawable/selector_btn_back"/>
+    <Button
+        android:id="@id/warnDialogPositiveBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/warnDialogContent"
+        android:padding="5dp"
+        android:layout_marginTop="@dimen/margin"
+        android:layout_marginLeft="@dimen/padding"
+        android:layout_alignParentRight="true"
+        android:textColor="@color/dodgerBlue"
+        android:text="确 定"
+        android:textSize="@dimen/dim15sp"
+        android:background="@drawable/selector_btn_back"/>
+
+</RelativeLayout>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/timeReamin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorAccent"
+        android:text="5"
+        android:textSize="20sp"
+        android:paddingBottom="20dp"
+        android:gravity="center"/>
+
+    <Button
+        android:id="@+id/ios_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="WarnDialog IOS 风格"/>
+
+    <Button
+        android:id="@+id/material_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="WarnDialog Material 风格"/>
+
+    <Button
+        android:id="@+id/classic_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="LoadDialog Classic 风格"/>
+
+    <Button
+        android:id="@+id/load_material_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="LoadDialog Material 风格"/>
+
+</LinearLayout>

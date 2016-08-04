@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="warnDialogTitle" type="id"/>
+    <item name="warnDialogContent" type="id"/>
+    <item name="warnDialogNegativeBtn" type="id"/>
+    <item name="warnDialogPositiveBtn" type="id"/>
+    <item name="dialogLoadView" type="id"/>
+</resources>

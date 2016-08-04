@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.seeker.libraries.weight.recycleView.FinalRecycleView
+        android:id="@+id/finalRecycleView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:showStyle="GRIDVIEW_NORMAL"
+        app:gridSpanCount="2"
+        app:innerDivider="@color/divider"
+        app:innerDividerWidth="1dp">
+
+    </com.seeker.libraries.weight.recycleView.FinalRecycleView>
+
+    <include layout="@layout/empty"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@android:drawable/ic_dialog_email" />
+
+</android.support.design.widget.CoordinatorLayout>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/background_round_corner"
+    android:padding="@dimen/loadViewMargin">
+
+    <com.seeker.libraries.weight.progressView.LoadClassicView
+        android:id="@id/dialogLoadView"
+        android:layout_width="@dimen/loadViewSize"
+        android:layout_height="@dimen/loadViewSize" />
+
+</LinearLayout>

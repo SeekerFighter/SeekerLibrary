@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">SeekerLibraryDemo</string>
+    
+    
+    <string name="FinalRecycleView">FinalRecycleView Demo</string>
+    <string name="emptyClues">击下方按钮刷新数据</string>
+    <string name="OKHttpManger">OKHttpManger Demo</string>
+    <string name="CropImageView">CropImageView Demo</string>
+    <string name="LibDialogFragment">LibDialogFragment Demo</string>
+
+</resources>
