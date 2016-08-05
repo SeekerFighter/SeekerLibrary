@@ -10,7 +10,7 @@
         android:id="@+id/finalRecycleView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:showStyle="GRIDVIEW_NORMAL"
+        app:showStyle="LISTVIEW_VERTICAL"
         app:gridSpanCount="2"
         app:innerDivider="@color/divider"
         app:innerDividerWidth="1dp">

@@ -5,8 +5,9 @@ import android.widget.Toast;
 
 import com.seeker.demo.R;
 import com.seeker.libraries.base.BaseActivity;
-import com.seeker.libraries.weight.recycleView.BaseRecycleView;
 import com.seeker.libraries.weight.recycleView.FinalRecycleView;
+import com.seeker.libraries.weight.recycleView.CheckItemTouchListener;
+
 import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -17,7 +18,7 @@ import butterknife.Unbinder;
  * Created by Seeker on 2016/7/21.
  */
 public class FinalRecycleViewActivity extends BaseActivity
-        implements BaseRecycleView.OnItemClickListener,BaseRecycleView.OnLongItemClickListener{
+        implements CheckItemTouchListener.OnItemClickListener,CheckItemTouchListener.OnLongItemClickListener{
 
     private Unbinder unbinder;
 

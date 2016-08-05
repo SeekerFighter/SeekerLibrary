@@ -1,6 +1,7 @@
 package com.seeker.demo.FinalRecycleView;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import com.seeker.demo.R;
 import com.seeker.libraries.weight.recycleView.BaseRecyleAdapter;
@@ -17,6 +18,11 @@ public class FinalAdapter extends BaseRecyleAdapter<String,BaseViewHolder> {
 	@Override
 	public int getItemLayoutId(int viewType) {
 		return R.layout.item;
+	}
+
+	@Override
+	public View getOverflowLayout() {
+		return LayoutInflater.from(mContext).inflate(R.layout.finalrecycleview_overflow_layout,null);
 	}
 
 	@Override

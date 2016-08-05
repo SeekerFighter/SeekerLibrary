@@ -5,4 +5,6 @@
     <item name="warnDialogNegativeBtn" type="id"/>
     <item name="warnDialogPositiveBtn" type="id"/>
     <item name="dialogLoadView" type="id"/>
+    <item name="overflowContainer" type="id"/>
+    <item name="contentContainer" type="id"/>
 </resources>
