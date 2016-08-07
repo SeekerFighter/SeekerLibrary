@@ -98,14 +98,24 @@ public class CheckItemTouchListener implements RecyclerView.OnItemTouchListener{
     private PerformClick mPerformClick;
 
     /**
-     * associated with pointToView
+     * associated with pointToView,if moved true, else false
      */
     private boolean isMove = false;
+
+    /**
+     * 当前touch事件下，pointToView是否可以往下执行click以及longPress监听
+     */
+    private boolean canClick = true;
 
     /**
      * 判断是否有子view处于打开状态
      */
     private boolean hasChildOpen = false;
+
+    /**
+     * 当recycleView滑动时，拦截此次所有事件
+     */
+    private boolean canIntercept = false;
 
     private float mTouchSlop;
 
@@ -124,42 +134,46 @@ public class CheckItemTouchListener implements RecyclerView.OnItemTouchListener{
 
     @Override
     public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent me) {
+
         final int actionMasked = me.getActionMasked();
 
+        /**
+         * 判断RecycleView是否需要拦截此次事件
+         */
         if(actionMasked == MotionEvent.ACTION_DOWN){
-            if(mRecycleView.getScrollState() != RecyclerView.SCROLL_STATE_IDLE){
-                return false;
-            }
+            canIntercept = mRecycleView.getScrollState() != RecyclerView.SCROLL_STATE_IDLE;
         }
 
-        switch (actionMasked){
-            case MotionEvent.ACTION_DOWN:{
-                onTouchDown(me);
-            }break;
-            case MotionEvent.ACTION_MOVE: {
-                onTouchMove(me);
-            }break;
-            case MotionEvent.ACTION_UP:{
-                onTouchUp(me);
-            }break;
-            case MotionEvent.ACTION_CANCEL:{
-                Logger.t(TAG).d("MotionEvent.ACTION_CANCEL");
-                if(pointToView != null){
-                    pointToView.setPressed(false);
-                }
-            }break;
+        if(!canIntercept){
+            switch (actionMasked){
+                case MotionEvent.ACTION_DOWN:{
+                    onTouchDown(me);
+                }break;
+                case MotionEvent.ACTION_MOVE: {
+                    onTouchMove(me);
+                }break;
+                case MotionEvent.ACTION_UP:{
+                    onTouchUp(me);
+                }break;
+                case MotionEvent.ACTION_CANCEL:{
+                    Logger.t(TAG).d("MotionEvent.ACTION_CANCEL");
+                    if(pointToView != null){
+                        pointToView.setPressed(false);
+                    }
+                }break;
+            }
         }
         return false;
     }
 
     @Override
     public void onTouchEvent(RecyclerView rv, MotionEvent me) {
-        Logger.t(TAG).d("[onTouchEvent]");
+
     }
 
     @Override
     public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-        Logger.t(TAG).d("[onRequestDisallowInterceptTouchEvent]");
+
     }
 
     private void onTouchDown(MotionEvent event){
@@ -169,29 +183,28 @@ public class CheckItemTouchListener implements RecyclerView.OnItemTouchListener{
         mMotionDownY =  event.getY();
         mLastX = mMotionDownX;
         mLastY = mMotionDownY;
+        canClick = true;
 
-        if(canCloseItemIfNeed() || hasChildOpen){
-            return;
-        }
+        isMove = canCloseItemIfNeed();
 
         if(mPendingCheckForTap == null){
             mPendingCheckForTap = new CheckForTap();
         }
 
-        pointToView = mRecycleView.findChildViewUnder(mMotionDownX,mMotionDownY);
+        if(canClick)
+            mRecycleView.postDelayed(mPendingCheckForTap,ViewConfiguration.getTapTimeout());
 
-        mRecycleView.postDelayed(mPendingCheckForTap,ViewConfiguration.getTapTimeout());
+        pointToView = mRecycleView.findChildViewUnder(mMotionDownX,mMotionDownY);
 
         initScrollView(pointToView);
 
-        isMove = false;
         moveDirection = MOVE_I;
         mTouchMode = TOUCH_MODE_DOWN;
     }
 
     private void onTouchMove(MotionEvent event){
         if(pointToView == null){
-            return;
+            pointToView = mRecycleView.findChildViewUnder(mMotionDownX,mMotionDownY);
         }
         switch (mTouchMode){
             case TOUCH_MODE_DOWN:
@@ -214,7 +227,7 @@ public class CheckItemTouchListener implements RecyclerView.OnItemTouchListener{
     private void onTouchUp(MotionEvent event){
         Logger.t(TAG).d("[onTouchUp]");
         if(pointToView == null){
-            return;
+            pointToView = mRecycleView.findChildViewUnder(mMotionDownX,mMotionDownY);
         }
 
         if(canAutoOpenOrCloseItem(event.getX(),event.getY())){
@@ -253,7 +266,7 @@ public class CheckItemTouchListener implements RecyclerView.OnItemTouchListener{
                                     mPendingCheckForTap:mPendingCheckForLongPress);
                         }
 
-                        if(!isMove){
+                        if(canClick && !hasChildOpen){
                             pointToView.setPressed(true);
                             mRecycleView.postDelayed(mPerformClick,ViewConfiguration.getPressedStateDuration());
                         }
@@ -306,6 +319,7 @@ public class CheckItemTouchListener implements RecyclerView.OnItemTouchListener{
 
         if(Math.max(Math.abs(x - mMotionDownX),Math.abs(y - mMotionDownY)) > mTouchSlop || isMove){
             isMove = true;
+            canClick = false;
         }else {
             return false;
         }
@@ -360,11 +374,14 @@ public class CheckItemTouchListener implements RecyclerView.OnItemTouchListener{
      */
     private boolean canCloseItemIfNeed(){
 
-        if(!hasChildOpen || soflChild == null){
+        if(!hasChildOpen || soflChild == null || pointToView == null){
+            canClick = true;
             return false;
         }
 
         final boolean inOpenView = pointInView(getSoflChildRect(),(int) mMotionDownX,(int)mMotionDownY);
+
+        canClick = !inOpenView;
 
         final boolean inContent = pointInView(getContentRect(),(int) mMotionDownX,(int)mMotionDownY);
 
@@ -372,7 +389,7 @@ public class CheckItemTouchListener implements RecyclerView.OnItemTouchListener{
 
         final boolean canClose = !inOpenView || (inOpenView && inContent);
 
-        if(canClose && hasChildOpen){
+        if(canClose){
             return autoScrollItem(soflChild.getOverflowLayoutWidth(),
                     -soflChild.getOverflowLayoutWidth(),false);
         }
@@ -436,7 +453,7 @@ public class CheckItemTouchListener implements RecyclerView.OnItemTouchListener{
     }
 
     /**
-     * 判断当前手势操作是否还在view之内
+     * 判断当前手势操作是否还在rect之内
      * @param localX
      * @param localY
      * @return
@@ -459,12 +476,17 @@ public class CheckItemTouchListener implements RecyclerView.OnItemTouchListener{
      * @return
      */
     private Rect getSoflChildRect(){
-        final float translationX = ViewCompat.getTranslationX(pointToView);
-        final float translationY = ViewCompat.getTranslationY(pointToView);
-        outRect.left = (int) (pointToView.getLeft() + translationX);
-        outRect.right = (int)(pointToView.getRight() + translationX);
-        outRect.top = (int) (pointToView.getTop() + translationY);
-        outRect.bottom = (int) (pointToView.getBottom() +translationY);
+        if(pointToView != null){
+            final float translationX = ViewCompat.getTranslationX(pointToView);
+            final float translationY = ViewCompat.getTranslationY(pointToView);
+            outRect.left = (int) (pointToView.getLeft() + translationX);
+            outRect.right = (int)(pointToView.getRight() + translationX);
+            outRect.top = (int) (pointToView.getTop() + translationY);
+            outRect.bottom = (int) (pointToView.getBottom() +translationY);
+        }else {
+            outRect.set(0,0,0,0);
+        }
+
         return outRect;
     }
 
@@ -474,7 +496,11 @@ public class CheckItemTouchListener implements RecyclerView.OnItemTouchListener{
      */
     private Rect getContentRect(){
         Rect rect = getSoflChildRect();
-        rect.right -= soflChild.getOverflowLayoutWidth();
+        if(soflChild != null){
+            rect.right -= soflChild.getOverflowLayoutWidth();
+        }else{
+            rect.set(0,0,0,0);
+        }
         return rect;
     }
 
@@ -547,7 +573,7 @@ public class CheckItemTouchListener implements RecyclerView.OnItemTouchListener{
 
         @Override
         public void run() {
-            if(pointToView != null && mLongClickListener != null && !isMove){
+            if(pointToView != null && mLongClickListener != null && canClick && !hasChildOpen){
                 RecyclerView.ViewHolder vh = mRecycleView.getChildViewHolder(pointToView);
                 mLongClickListener.onLongItemClick(pointToView,vh.getAdapterPosition());
             }
@@ -562,8 +588,8 @@ public class CheckItemTouchListener implements RecyclerView.OnItemTouchListener{
 
         @Override
         public void run() {
-            final View pointToView = mRecycleView.findChildViewUnder(x,y);
             if(pointToView != null && mClickListener != null){
+                pointToView.setPressed(true);
                 RecyclerView.ViewHolder vh = mRecycleView.getChildViewHolder(pointToView);
                 mClickListener.onItemClick(pointToView,vh.getAdapterPosition());
             }
