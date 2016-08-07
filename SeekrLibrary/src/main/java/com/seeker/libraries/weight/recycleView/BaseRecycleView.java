@@ -93,6 +93,22 @@ public abstract class BaseRecycleView extends RecyclerView{
 	}
 
 	/**
+	 * 监听overflow点击
+	 * @param listener
+     */
+	public void setOverflowClickListener(CheckItemTouchListener.OverflowClickListener listener){
+		onItemTouchListener.setOverflowClickListener(listener);
+	}
+
+	/**
+	 * 主动关闭显示了overflow的item
+	 * @return
+     */
+	public boolean closeOpenedItem(){
+		return onItemTouchListener.closeOpenedItem();
+	}
+
+	/**
 	 * 设置数据为空时要显示的布局
 	 * @param emptyView
 	 */

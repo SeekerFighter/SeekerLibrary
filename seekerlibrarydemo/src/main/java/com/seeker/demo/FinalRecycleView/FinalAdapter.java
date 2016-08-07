@@ -21,8 +21,8 @@ public class FinalAdapter extends BaseRecyleAdapter<String,BaseViewHolder> {
 	}
 
 	@Override
-	public View getOverflowLayout() {
-		return LayoutInflater.from(mContext).inflate(R.layout.finalrecycleview_overflow_layout,null);
+	public int getOverflowLayoutId(int viewType) {
+		return R.layout.finalrecycleview_overflow_layout;
 	}
 
 	@Override

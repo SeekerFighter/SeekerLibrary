@@ -10,7 +10,7 @@
         android:orientation="horizontal"
         android:layout_gravity="right|center_vertical"
         />
-    <LinearLayout
+    <com.seeker.libraries.weight.recycleView.ContentContainerLayout
         android:id="@id/contentContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

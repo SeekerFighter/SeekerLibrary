@@ -1,15 +1,15 @@
 package com.seeker.libraries.weight.recycleView;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-
 import com.seeker.libraries.R;
+import com.seeker.libraries.logger.Logger;
 
 /**
  * Created by Seeker on 2016/8/5.
@@ -23,7 +23,7 @@ public class ScrollOverflowLayout extends FrameLayout{
 
     private View overflowLayout,contentLayout;
 
-    private LinearLayout overflowContainer,contentContainer;
+    private ViewGroup overflowContainer,contentContainer;
 
     public ScrollOverflowLayout(Context context) {
         this(context,null);
@@ -35,13 +35,42 @@ public class ScrollOverflowLayout extends FrameLayout{
 
     public ScrollOverflowLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        View container = LayoutInflater.from(context).inflate(R.layout.recycleview_item_container_layout,this,true);
-        overflowContainer = (LinearLayout) container.findViewById(R.id.overflowContainer);
-        contentContainer = (LinearLayout) container.findViewById(R.id.contentContainer);
+    }
+
+    @Override
+    protected void onFinishInflate() {
+        super.onFinishInflate();
+        final int childCount = getChildCount();
+        Logger.t(TAG).d("childCount = "+childCount);
+        /**
+         * childCount == 0，说明是动态添加的overflowLayout
+         */
+        if(childCount == 0){
+            setContainer();
+        }else{
+            try {
+                overflowContainer = (ViewGroup)findViewById(R.id.overflowContainer);
+                contentContainer = (ViewGroup)findViewById(R.id.contentContainer);
+            }catch (Resources.NotFoundException rn){
+                throw new Resources.NotFoundException("Can not find childs which id is 'overflowContainer' or " +
+                        "'contentContainer',you must contain! ");
+            }
+
+        }
     }
 
     /**
-     *
+     * 动态设置容器
+     */
+    private void setContainer(){
+        View container = LayoutInflater.from(getContext())
+                .inflate(R.layout.recycleview_item_container_layout,this,true);
+        overflowContainer = (ViewGroup) container.findViewById(R.id.overflowContainer);
+        contentContainer = (ViewGroup)container.findViewById(R.id.contentContainer);
+    }
+
+    /**
+     *  动态设置
      * @param overflowLayout
      */
     public ScrollOverflowLayout setOverFlowLayout(View overflowLayout){
@@ -50,7 +79,7 @@ public class ScrollOverflowLayout extends FrameLayout{
     }
 
     /**
-     *
+     * 动态设置
      * @param contentLayout
      */
     public ScrollOverflowLayout setContentLayout(View contentLayout){
@@ -58,7 +87,15 @@ public class ScrollOverflowLayout extends FrameLayout{
         return this;
     }
 
+    /**
+     * 动态添加的时候必须调用此方法
+     */
     public void add(){
+
+        if(checkContainerNull()){
+            setContainer();
+        }
+
         if(contentLayout == null){
             throw new NullPointerException("contentLayout == null");
         }
@@ -78,11 +115,21 @@ public class ScrollOverflowLayout extends FrameLayout{
         contentContainer.addView(contentLayout);
     }
 
-    public LinearLayout getOverflowContainer() {
+    private boolean checkContainerNull(){
+        boolean isNull = false;
+        if(overflowContainer == null || contentContainer == null){
+            isNull = true;
+            overflowContainer = null;
+            contentContainer = null;
+        }
+        return isNull;
+    }
+
+    public ViewGroup getOverflowContainer() {
         return overflowContainer;
     }
 
-    public LinearLayout getContentContainer() {
+    public ViewGroup getContentContainer() {
         return contentContainer;
     }
 

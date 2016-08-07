@@ -18,7 +18,9 @@ import butterknife.Unbinder;
  * Created by Seeker on 2016/7/21.
  */
 public class FinalRecycleViewActivity extends BaseActivity
-        implements CheckItemTouchListener.OnItemClickListener,CheckItemTouchListener.OnLongItemClickListener{
+        implements CheckItemTouchListener.OnItemClickListener,
+        CheckItemTouchListener.OnLongItemClickListener,
+        CheckItemTouchListener.OverflowClickListener{
 
     private Unbinder unbinder;
 
@@ -54,6 +56,7 @@ public class FinalRecycleViewActivity extends BaseActivity
         finalRecycleView.setEmptyView(emptyView);
         finalRecycleView.setOnItemClickListener(this);
         finalRecycleView.setOnItemLongClickListener(this);
+        finalRecycleView.setOverflowClickListener(this);
     }
 
     @OnClick(R.id.fab)
@@ -70,13 +73,33 @@ public class FinalRecycleViewActivity extends BaseActivity
 
     @Override
     public void onItemClick(View itemView, int position) {
-        Toast.makeText(this,"[click]position = "+position+"str = "+list.get(position),
+        Toast.makeText(this,"[click]position = "+position+",str = "+list.get(position),
                 Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onLongItemClick(View itemView, int position) {
-        Toast.makeText(this,"[longClick]position = "+position+"str = "+list.get(position),
+        Toast.makeText(this,"[longClick]position = "+position+",str = "+list.get(position),
                 Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onOveflowClick(View view, int position) {
+        switch (view.getId()){
+            case R.id.add:
+                finalRecycleView.closeOpenedItem();
+                Toast.makeText(this,"[onOveflowClick]position = "+position+",add", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.delete:
+                Toast.makeText(this,"[onOveflowClick]position = "+position+",delete", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.cancle:
+                Toast.makeText(this,"[onOveflowClick]position = "+position+",cancle", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.edit:
+                Toast.makeText(this,"[onOveflowClick]position = "+position+",edit", Toast.LENGTH_SHORT).show();
+                break;
+        }
+
     }
 }

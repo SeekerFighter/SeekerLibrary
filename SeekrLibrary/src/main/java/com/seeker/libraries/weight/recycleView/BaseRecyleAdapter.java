@@ -10,7 +10,9 @@ import android.widget.FrameLayout;
 import java.util.List;
 
 public abstract class BaseRecyleAdapter <T,VH extends BaseViewHolder> extends RecyclerView.Adapter<VH>{
-	
+
+	private static final int OVERFLOW_NO_SET = -1;
+
 	public Context mContext;
 	public List<T> mDatas;
 
@@ -26,12 +28,14 @@ public abstract class BaseRecyleAdapter <T,VH extends BaseViewHolder> extends Re
 	
 	@Override
 	public VH onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-		final View contentView = LayoutInflater.from(mContext).inflate(getItemLayoutId(viewType), viewGroup, false);
-		final View overflowView = getOverflowLayout();
+		final LayoutInflater inflater = LayoutInflater.from(mContext);
+		final View contentView = inflater.inflate(getItemLayoutId(viewType), null, false);
+		final int overflowResId = getOverflowLayoutId(viewType);
 		VH vh;
-		if(overflowView == null){
+		if(overflowResId == OVERFLOW_NO_SET){
 			vh = convertCreateViewHolder(contentView);
 		}else{
+			final View overflowView = inflater.inflate(overflowResId,null,false);
 			ScrollOverflowLayout scrollOverflowLayout = new ScrollOverflowLayout(mContext);
 			scrollOverflowLayout.setOverFlowLayout(overflowView)
 								.setContentLayout(contentView)
@@ -66,8 +70,8 @@ public abstract class BaseRecyleAdapter <T,VH extends BaseViewHolder> extends Re
 	 * when scroll left,more action can do.
 	 * @return
      */
-	public View getOverflowLayout(){
-		return null;
+	public int getOverflowLayoutId(int viewType){
+		return OVERFLOW_NO_SET;
 	}
 
 	/**
