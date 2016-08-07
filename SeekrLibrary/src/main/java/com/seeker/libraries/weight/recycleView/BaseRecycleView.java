@@ -1,28 +1,17 @@
 package com.seeker.libraries.weight.recycleView;
 
 import android.content.Context;
-import android.os.Handler;
-import android.os.Message;
-import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
-import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewConfiguration;
+
+import com.seeker.libraries.logger.Logger;
 
 public abstract class BaseRecycleView extends RecyclerView{
 
-	private Context mContext;
-	/**
-	 * 点击事件监听
-	 */
-	private OnItemClickListener mClickListener;
-	/**
-	 * 长按事件的监听
-	 */
-	private OnLongItemClickListener mLongClickListener;
-
+	private static final String TAG = "BaseRecycleView";
+	
 	/**
 	 * 数据为空时显示的布局
 	 */
@@ -32,6 +21,8 @@ public abstract class BaseRecycleView extends RecyclerView{
 	 * 数据监听
 	 */
 	private DataEmptyObserview dataEmptyObserview;
+
+	private CheckItemTouchListener onItemTouchListener;
 
 	public BaseRecycleView(Context context) {
 		this(context, null);
@@ -43,13 +34,14 @@ public abstract class BaseRecycleView extends RecyclerView{
 	
 	public BaseRecycleView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
-		this.mContext = context;
 		this.dataEmptyObserview = new DataEmptyObserview();
-		this.addOnItemTouchListener(new OnRecycleViewItemClickListener());
+		this.onItemTouchListener = new CheckItemTouchListener(this);
+		this.addOnItemTouchListener(onItemTouchListener);
 	}
 	
 	@Override
 	public boolean onInterceptTouchEvent(MotionEvent event) {
+		Logger.t(TAG).d("[onInterceptTouchEvent]");
 		/**
 		 *拦截多点触控
 		 */
@@ -59,7 +51,7 @@ public abstract class BaseRecycleView extends RecyclerView{
 		}
 		return super.onInterceptTouchEvent(event);
 	}
-	
+
 	@Override
 	protected void onFinishInflate() {
 		super.onFinishInflate();
@@ -88,15 +80,32 @@ public abstract class BaseRecycleView extends RecyclerView{
 	/**
 	 *设置行点击事件 
 	 */
-	public void setOnItemClickListener(OnItemClickListener listener){
-		this.mClickListener = listener;
+	public void setOnItemClickListener(CheckItemTouchListener.OnItemClickListener listener){
+		onItemTouchListener.setOnItemClickListener(listener);
 	}
 	
 	/**
 	 *设置行长按事件 
 	 */
-	public void setOnItemLongClickListener(OnLongItemClickListener listener){
-		this.mLongClickListener = listener;
+	public void setOnItemLongClickListener(CheckItemTouchListener.OnLongItemClickListener listener){
+		this.setLongClickable(true);
+		onItemTouchListener.setOnItemLongClickListener(listener);
+	}
+
+	/**
+	 * 监听overflow点击
+	 * @param listener
+     */
+	public void setOverflowClickListener(CheckItemTouchListener.OverflowClickListener listener){
+		onItemTouchListener.setOverflowClickListener(listener);
+	}
+
+	/**
+	 * 主动关闭显示了overflow的item
+	 * @return
+     */
+	public boolean closeOpenedItem(){
+		return onItemTouchListener.closeOpenedItem();
 	}
 
 	/**
@@ -117,140 +126,6 @@ public abstract class BaseRecycleView extends RecyclerView{
 	 * 获取分割线
 	 */
 	public abstract RecyclerView.ItemDecoration getItemDecoration();
-
-	//点击事件监听接口
-	public interface OnItemClickListener{
-		/**
-		 * 点击事件回调
-		 * @param itemView：当前被点击的view
-		 * @param position：当前被点击的位置
-		 */
-		void onItemClick(View itemView, int position);
-	}
-
-	//长按事件监听接口
-	public interface OnLongItemClickListener{
-		/**
-		 * 长按事件回调
-		 * @param itemView：当前被长按的view
-		 * @param position：当前被长按的位置
-		 */
-		void onLongItemClick(View itemView, int position);
-	}
-
-	/**
-	 * 监听RecycleView的触摸事件
-	 */
-	private final class OnRecycleViewItemClickListener implements RecyclerView.OnItemTouchListener{
-
-		private GestureDetectorCompat mGestureDetectorCompat;
-
-		public OnRecycleViewItemClickListener(){
-			this.mGestureDetectorCompat = new GestureDetectorCompat(mContext,
-					new ItemTouchHelperGestureListener());
-		}
-
-		@Override
-		public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
-			mGestureDetectorCompat.onTouchEvent(e);
-			return false;
-		}
-
-		@Override
-		public void onTouchEvent(RecyclerView rv, MotionEvent e) {
-			mGestureDetectorCompat.onTouchEvent(e);
-		}
-
-		@Override
-		public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-			// todo nothing
-		}
-	}
-
-	/**
-	 * 处理触摸事件,响应处理点击，滑动，长按事件
-	 */
-	private final class ItemTouchHelperGestureListener implements GestureDetector.OnGestureListener{
-
-		private View onDownView;
-
-		private boolean press = false;
-
-		private static final int STATE_PRESSED = 0x001;
-
-		private static final int STATE_NO_PRESSED = 0x002;
-
-		private final Handler stateHandler = new Handler(){
-			@Override
-			public void handleMessage(Message msg) {
-				switch (msg.what){
-					case STATE_PRESSED:
-						if(onDownView != null){
-							onDownView.setPressed(press);
-						}
-						break;
-					case STATE_NO_PRESSED:
-						press = false;
-						if(onDownView != null){
-							onDownView.setPressed(false);
-						}
-						BaseRecycleView.this.setPressed(false);
-						BaseRecycleView.this.refreshDrawableState();
-						break;
-				}
-			}
-		};
-
-		@Override
-		public boolean onDown(MotionEvent e) {
-			press = true;
-			onDownView = BaseRecycleView.this.findChildViewUnder(e.getX(), e.getY());
-			if(onDownView != null){
-				stateHandler.sendEmptyMessageDelayed(STATE_PRESSED, ViewConfiguration.getTapTimeout());
-			}
-			return true;
-		}
-
-		@Override
-		public boolean onSingleTapUp(MotionEvent e) {
-			stateHandler.sendEmptyMessageDelayed(STATE_NO_PRESSED, ViewConfiguration.getTapTimeout());
-			if(mClickListener != null){
-				if(onDownView != null){
-					RecyclerView.ViewHolder vh = BaseRecycleView.this.getChildViewHolder(onDownView);
-					mClickListener.onItemClick(onDownView,vh.getAdapterPosition());
-				}
-			}
-			return true;
-		}
-
-		@Override
-		public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-			stateHandler.sendEmptyMessage(STATE_NO_PRESSED);
-			return true;
-		}
-
-		@Override
-		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-			stateHandler.sendEmptyMessage(STATE_NO_PRESSED);
-			return true;
-		}
-
-		@Override
-		public void onShowPress(MotionEvent e) {
-			// TODO: 2016/7/19
-		}
-
-		@Override
-		public void onLongPress(MotionEvent e) {
-			stateHandler.sendEmptyMessageDelayed(STATE_NO_PRESSED, ViewConfiguration.getTapTimeout());
-			if(mLongClickListener != null){
-				if(onDownView != null){
-					RecyclerView.ViewHolder vh = BaseRecycleView.this.getChildViewHolder(onDownView);
-					mLongClickListener.onLongItemClick(onDownView,vh.getAdapterPosition());
-				}
-			}
-		}
-	}
 
 	/**
 	 * 数据观察者

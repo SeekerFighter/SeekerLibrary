@@ -1,18 +1,16 @@
 package com.seeker.demo.OKHttpManger;
 
-import android.app.Dialog;
 import android.view.View;
 import android.widget.Toast;
 
-import com.seeker.demo.FinalRecycleView.FinalAdapter;
 import com.seeker.demo.OKHttpManger.bean.Info;
 import com.seeker.demo.OKHttpManger.bean.Result;
 import com.seeker.demo.R;
 import com.seeker.libraries.base.BaseMVPActivity;
 import com.seeker.demo.OKHttpManger.OKHttpFactory.OKHttpView;
 import com.seeker.demo.OKHttpManger.OKHttpFactory.OKHttpPresenter;
-import com.seeker.libraries.weight.recycleView.BaseRecycleView;
 import com.seeker.libraries.weight.recycleView.FinalRecycleView;
+import com.seeker.libraries.weight.recycleView.CheckItemTouchListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +25,7 @@ import butterknife.Unbinder;
  */
 
 public class OKHttpMangerActivity extends BaseMVPActivity
-        <OKHttpView<Result>,OKHttpPresenter> implements OKHttpView<Result>,BaseRecycleView.OnItemClickListener{
+        <OKHttpView<Result>,OKHttpPresenter> implements OKHttpView<Result>,CheckItemTouchListener.OnItemClickListener{
 
     private Unbinder unbinder;
 
