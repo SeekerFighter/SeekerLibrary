@@ -111,7 +111,7 @@ public class ScrollOverflowLayout extends FrameLayout{
         p.gravity = Gravity.RIGHT|Gravity.CENTER_VERTICAL;
         p.height = contentLayout.getMeasuredHeight();
 
-        overflowContainer.addView(overflowLayout);
+        overflowContainer.addView(overflowLayout,p);
         contentContainer.addView(contentLayout);
     }
 

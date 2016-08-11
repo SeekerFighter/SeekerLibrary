@@ -93,13 +93,6 @@ public class FinalRecycleViewActivity extends BaseActivity
             case R.id.delete:
                 Toast.makeText(this,"[onOveflowClick]position = "+position+",delete", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.cancle:
-                Toast.makeText(this,"[onOveflowClick]position = "+position+",cancle", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.edit:
-                Toast.makeText(this,"[onOveflowClick]position = "+position+",edit", Toast.LENGTH_SHORT).show();
-                break;
         }
-
     }
 }

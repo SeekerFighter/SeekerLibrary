@@ -130,7 +130,7 @@ public class LoadClassicView extends View {
          */
         exactlySize = width >= height ? height:width;
 
-        this.radius = 0.22f * exactlySize;
+        this.radius = 0.225f * exactlySize;
 
         setMeasuredDimension(exactlySize,exactlySize);
 
