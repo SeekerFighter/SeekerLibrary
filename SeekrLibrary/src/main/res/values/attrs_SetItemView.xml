@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="SetItemView">
+
+        <attr name="itemStyle" format="enum">
+            <enum name="normal" value="0"/>
+            <enum name="arrow" value="1"/>
+            <enum name="toggle" value="2"/>
+        </attr>
+
+        <attr name="drawableStart" format="reference"/>
+
+        <attr name="drawableStartWidth" format="dimension"/>
+
+        <attr name="drawableStartHeight" format="dimension"/>
+
+        <attr name="textStart" format="string"/>
+
+        <attr name="textStartColor" format="color"/>
+
+        <attr name="textStartSize" format="dimension"/>
+
+        <!--绘制textStart时距离左边的偏移量-->
+        <attr name="textStartLeftMargin" format="dimension"/>
+
+        <attr name="textEnd" format="string"/>
+
+        <attr name="textEndColor" format="color"/>
+
+        <attr name="textEndSize" format="dimension"/>
+
+        <attr name="textEndBackground" format="reference"/>
+
+        <attr name="textEndBackgroundColor" format="color"/>
+
+        <attr name="textEndBackgroundWidth" format="dimension"/>
+
+        <attr name="textEndBackgroundHeight" format="dimension"/>
+
+        <!--绘制textEnd时距离右边的偏移量-->
+        <attr name="textEndRightMargin" format="dimension"/>
+
+        <!--for ">" 标志-->
+
+        <attr name="arrowDrawable" format="reference"/>
+
+        <attr name="arrowWidth" format="dimension"/>
+
+        <attr name="arrowHeight" format="dimension"/>
+
+        <attr name="arrowColor" format="dimension"/>
+
+        <!--开关按钮绘制属性-->
+
+        <attr name="toggleWidth" format="dimension" />
+
+        <attr name="toggleHeight" format="dimension" />
+
+        <attr name="borderWidth" format="dimension" />
+
+        <attr name="areaColor" format="color" />
+
+        <attr name="offColor" format="color" />
+
+        <attr name="onColor" format="color" />
+
+        <attr name="handlerColor" format="color" />
+
+        <attr name="animate" format="boolean" />
+
+        <attr name="defaultOn" format="boolean" />
+
+    </declare-styleable>
+
+</resources>

@@ -5,28 +5,21 @@
     android:layout_height="wrap_content"
     android:focusable="false">
 
-    <Button
+    <TextView
         android:id="@+id/delete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
         android:text="delete"
-        android:focusable="false"/>
-    <Button
-        android:id="@+id/cancle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="cancle"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:background="@android:color/holo_red_light"
         android:focusable="false"/>
     <Button
         android:id="@+id/add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
         android:text="add"
-        android:focusable="false"/>
-    <Button
-        android:id="@+id/edit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="edit"
+        android:textColor="@android:color/white"
+        android:background="@android:color/holo_green_light"
         android:focusable="false"/>
 </LinearLayout>

@@ -352,20 +352,22 @@ public class CheckItemTouchListener implements RecyclerView.OnItemTouchListener{
         /**
          * overflow界面还未完全展示
          */
-        if(mMotionDownX - x <= soflChild.getOverflowLayoutWidth()){
+        if(mMotionDownX - x < soflChild.getOverflowLayoutWidth()){
             hasChildOpen = false;
-            delatX = mLastX - x;
+            contentGroup.scrollBy((int) (mLastX - x),0);
             mLastX = x;
         }else
         /**
          * 当overflow界面全部显示出来之后，禁止在往左滑动,但可以右滑
          */
-        if(mMotionDownX - x > soflChild.getOverflowLayoutWidth()){
+        if(mMotionDownX - x >= soflChild.getOverflowLayoutWidth()){
             hasChildOpen = true;
-            delatX = mLastX - soflChild.getLeft() + soflChild.getOverflowLayoutWidth();
-            mLastX = soflChild.getLeft() - soflChild.getOverflowLayoutWidth();
+            contentGroup.scrollTo(soflChild.getOverflowLayoutWidth(),0);
+            mLastX = x;
+//            delatX = mLastX - soflChild.getLeft() + soflChild.getOverflowLayoutWidth();
+//            mLastX = soflChild.getLeft() - soflChild.getOverflowLayoutWidth();
         }
-        contentGroup.scrollBy((int) delatX,0);
+
         return true;
     }
 
