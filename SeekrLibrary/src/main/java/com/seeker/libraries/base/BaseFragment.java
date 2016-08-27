@@ -84,7 +84,7 @@ public abstract class BaseFragment extends Fragment{
     /**
      * 当界面不可见时
      */
-    public void onUIInVisivle(){};
+    public void onUIInVisivle(){}
 
     /**
      * 界面显示的时候开始加载数据
