@@ -30,13 +30,9 @@
 
         <attr name="textEndSize" format="dimension"/>
 
-        <attr name="textEndBackground" format="reference"/>
+        <attr name="textEndPadding" format="dimension"/>
 
         <attr name="textEndBackgroundColor" format="color"/>
-
-        <attr name="textEndBackgroundWidth" format="dimension"/>
-
-        <attr name="textEndBackgroundHeight" format="dimension"/>
 
         <!--绘制textEnd时距离右边的偏移量-->
         <attr name="textEndRightMargin" format="dimension"/>
@@ -49,15 +45,13 @@
 
         <attr name="arrowHeight" format="dimension"/>
 
-        <attr name="arrowColor" format="dimension"/>
-
         <!--开关按钮绘制属性-->
 
         <attr name="toggleWidth" format="dimension" />
 
         <attr name="toggleHeight" format="dimension" />
 
-        <attr name="borderWidth" format="dimension" />
+        <attr name="boderWidth" format="dimension" />
 
         <attr name="areaColor" format="color" />
 
