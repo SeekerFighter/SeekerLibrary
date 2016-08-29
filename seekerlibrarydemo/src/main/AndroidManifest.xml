@@ -24,6 +24,10 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".SetItemView.SetItemViewActivity"
+            android:label="@string/SetItemView"
+            android:screenOrientation="portrait"/>
+
         <activity android:name=".FinalRecycleView.FinalRecycleViewActivity"
             android:label="@string/FinalRecycleView"
             android:screenOrientation="portrait" />

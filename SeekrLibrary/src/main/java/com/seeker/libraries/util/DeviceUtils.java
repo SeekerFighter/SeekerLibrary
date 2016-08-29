@@ -15,7 +15,7 @@ import android.view.WindowManager;
  *
  * 获取手机设备等的一些数据
  */
-public class DeviceUtil {
+public class DeviceUtils {
 
     /**
      * 获取DisplayMetrics

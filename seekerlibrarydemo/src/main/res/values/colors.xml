@@ -7,5 +7,7 @@
 
     <color name="textColor">#5A5A5A</color>
     <color name="divider">#CCCCCC</color>
+    <color name="white">#ffffff</color>
+    <color name="red">#FFff0000</color>
 
 </resources>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.seeker.libraries.weight.SetItemView
+        style="@style/SetItemStyleBase"
+        android:background="@color/white"
+        app:drawableStart="@drawable/option1"
+        app:textStartLeftMargin="10dp"
+        app:textStart="个性化"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.33dp"
+        android:background="@color/divider"/>
+    
+    
+    <com.seeker.libraries.weight.SetItemView
+        style="@style/SetItemStyleBase"
+        android:background="@color/white"
+        app:drawableStart="@drawable/option2"
+        app:drawableStartWidth="25dp"
+        app:drawableStartHeight="25dp"
+        app:textStartLeftMargin="10dp"
+        app:textStart="应用管理"
+        app:textStartColor="@color/colorAccent"
+        app:textStartSize="20sp"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.33dp"
+        android:background="@color/divider"/>
+
+    <com.seeker.libraries.weight.SetItemView
+        style="@style/SetItemStyleBase"
+        android:background="@color/white"
+        app:drawableStart="@drawable/option3"
+        app:textStartLeftMargin="10dp"
+        app:textStart="虚拟手机号"
+        app:itemStyle="arrow"
+        app:arrowDrawable="@drawable/arrow"
+        app:arrowWidth="8dp"
+        app:arrowHeight="14dp"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.33dp"
+        android:background="@color/divider"/>
+
+    <com.seeker.libraries.weight.SetItemView
+        style="@style/SetItemStyleBase"
+        android:background="@color/white"
+        app:drawableStart="@drawable/option4"
+        app:textStartLeftMargin="10dp"
+        app:textStart="联系人导入"
+        app:itemStyle="toggle"
+        app:onColor="@color/colorPrimary"
+        app:offColor="@color/red"
+        app:handlerColor="@color/white"
+        app:areaColor="@color/colorAccent"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.33dp"
+        android:background="@color/divider"/>
+
+    <com.seeker.libraries.weight.SetItemView
+        android:id="@+id/supportKa"
+        style="@style/SetItemStyleBase"
+        android:background="@color/white"
+        app:drawableStart="@drawable/option5"
+        app:textStartLeftMargin="10dp"
+        app:textStart="支持双卡"
+        app:itemStyle="toggle"
+        app:defaultOn="false"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.33dp"
+        android:background="@color/divider"/>
+
+    <com.seeker.libraries.weight.SetItemView
+        style="@style/SetItemStyleBase"
+        android:background="@color/white"
+        app:drawableStart="@drawable/option6"
+        app:textStartLeftMargin="10dp"
+        app:textStart="版本号"
+        app:textEnd="VH-1.0-Beta"
+        app:textEndColor="@color/divider"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.33dp"
+        android:background="@color/divider"/>
+
+    <com.seeker.libraries.weight.SetItemView
+        android:id="@+id/updateVsersion"
+        style="@style/SetItemStyleBase"
+        android:background="@drawable/click_back"
+        app:drawableStart="@drawable/option8"
+        app:textStartLeftMargin="10dp"
+        app:textStart="虚拟手机号"
+        app:itemStyle="arrow"
+        app:arrowDrawable="@drawable/arrow"
+        app:arrowWidth="8dp"
+        app:arrowHeight="14dp"
+        app:textEnd="UPDATE"
+        app:textEndSize="12sp"
+        app:textEndColor="@color/white"
+        app:textEndBackgroundColor="@color/white"
+        app:textEndPadding="8dp"
+        app:textEndRightMargin="10dp"
+        />
+</LinearLayout>

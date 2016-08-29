@@ -18,15 +18,17 @@
         <item name="android:gravity">center</item>
     </style>
 
-    <style name="MenuItemStyle">
+    <style name="SetItemStyleBase">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/MenuitemHeight</item>
         <item name="android:paddingLeft">@dimen/padding</item>
         <item name="android:paddingRight">@dimen/padding</item>
-        <item name="com.seeker.demo:textColor">@color/textColor</item>
-        <item name="com.seeker.demo:textSize">@dimen/textSize2</item>
-        <item name="com.seeker.demo:itemType">arrowType</item>
+        <item name="com.seeker.demo:textStartColor">@color/textColor</item>
+        <item name="com.seeker.demo:textStartSize">@dimen/textSize2</item>
     </style>
 
+    <style name="SetItemStyleMiddle" parent="SetItemStyleBase">
+        <item name="android:background">@drawable/background_view_rounded_middle</item>
+    </style>
 
 </resources>

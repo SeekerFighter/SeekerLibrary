@@ -1,9 +1,12 @@
 package com.seeker.libraries.util;
 
+import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.graphics.PorterDuff;
@@ -12,7 +15,11 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-
+import android.os.Build;
+import android.renderscript.Allocation;
+import android.renderscript.Element;
+import android.renderscript.RenderScript;
+import android.renderscript.ScriptIntrinsicBlur;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
@@ -21,7 +28,7 @@ import java.io.IOException;
  *
  * 图片操作
  */
-public class ImageUtil {
+public class ImageUtils {
 
     /**
      * drawable图片转成bitmap图片
@@ -92,7 +99,7 @@ public class ImageUtil {
      * @param pixels
      * @return
      */
-    public static Bitmap getRoundCornerBitmap(Bitmap bitmap, float pixels){
+    public static Bitmap toRoundCornerBitmap(Bitmap bitmap, float pixels){
         if (bitmap == null) return null;
         Bitmap output = Bitmap.createBitmap(bitmap.getWidth(),bitmap.getHeight(), Bitmap.Config.ARGB_8888);
         final Canvas canvas = new Canvas(output);
@@ -109,13 +116,83 @@ public class ImageUtil {
     }
 
     /**
-     * drawable图片转成圆角drawable图片
-     * @param drawable
-     * @param pixels
+     * 转成圆形图片
+     * @param bitmap
      * @return
      */
-    public static Drawable getRoundCornerDrawable(Drawable drawable, float pixels){
-        if(drawable == null) return null;
-        return new BitmapDrawable(null,getRoundCornerBitmap(drawableToBitmap(drawable),pixels));
+    public static Bitmap toCircleBitmap(Bitmap bitmap){
+        if (bitmap == null) return null;
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        Bitmap output = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(output);
+        final Paint paint = new Paint();
+        final Rect rect = new Rect(0, 0, width, height);
+        paint.setAntiAlias(true);
+        canvas.drawARGB(0, 0, 0, 0);
+        paint.setColor(Color.TRANSPARENT);
+        canvas.drawCircle(width / 2, height / 2, width / 2, paint);
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        canvas.drawBitmap(bitmap, rect, rect, paint);
+        return output;
+    }
+
+    /**
+     * 转为模糊图片
+     *
+     * @param src  源图片
+     * @param radius  模糊度(0...25)
+     * @param context 上下文
+     * @return 模糊后的图片
+     */
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
+    public static Bitmap toBlurBitmap(Bitmap src, float radius, Context context) {
+        if (src == null) return null;
+        Bitmap outBitmap = Bitmap.createBitmap(src.getWidth(), src.getHeight(), Bitmap.Config.ARGB_8888);
+        RenderScript rs = RenderScript.create(context);
+        ScriptIntrinsicBlur blurScript = ScriptIntrinsicBlur.create(rs, Element.U8_4(rs));
+        Allocation allIn = Allocation.createFromBitmap(rs, src);
+        Allocation allOut = Allocation.createFromBitmap(rs, outBitmap);
+        if (radius > 25) {
+            radius = 25.0f;
+        } else if (radius <= 0) {
+            radius = 1.0f;
+        }
+        blurScript.setRadius(radius);
+        blurScript.setInput(allIn);
+        blurScript.forEach(allOut);
+        allOut.copyTo(outBitmap);
+        rs.destroy();
+        if (!src.isRecycled()) src.recycle();
+        return outBitmap;
+    }
+
+    /**
+     * 添加颜色边框
+     *
+     * @param src         源图片
+     * @param borderWidth 边框宽度
+     * @param color       边框的颜色值
+     * @return 带颜色边框图
+     */
+    public static Bitmap addFrame(Bitmap src, int borderWidth, int color) {
+        if (src == null) return null;
+        int newWidth = src.getWidth() + borderWidth;
+        int newHeight = src.getHeight() + borderWidth;
+        Bitmap out = Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(out);
+        Rect rec = canvas.getClipBounds();
+        rec.bottom--;
+        rec.right--;
+        Paint paint = new Paint();
+        paint.setColor(color);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(borderWidth);
+        canvas.drawRect(rec, paint);
+        canvas.drawBitmap(src, borderWidth / 2, borderWidth / 2, null);
+        canvas.save(Canvas.ALL_SAVE_FLAG);
+        canvas.restore();
+        if (!src.isRecycled()) src.recycle();
+        return out;
     }
 }

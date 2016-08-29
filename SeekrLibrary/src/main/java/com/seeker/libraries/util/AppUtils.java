@@ -12,7 +12,7 @@ import java.net.URI;
  * Created by Seeker on 2016/7/29.
  */
 
-public class AppUtil {
+public class AppUtils {
 
     /**
      * 打开照相机拍照

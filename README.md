@@ -20,7 +20,7 @@ Seeker开发依赖库，包含以下内容：
 
 6.Logger，log信息打印
 
-7.MenuItemView，自定义view，设置里面的每一项
+7.SetItemView，自定义view，设置里面的每一项
 
 8.AdvancedCountdownTimer，倒计时工具，可以暂停，快进快退
 

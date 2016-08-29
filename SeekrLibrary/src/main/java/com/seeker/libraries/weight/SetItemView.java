@@ -1,7 +1,6 @@
 package com.seeker.libraries.weight;
 
 import android.content.Context;
-import android.content.res.CompatibilityInfo;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -171,9 +170,9 @@ public class SetItemView extends View {
                 drawableStart = ta.getDrawable(R.styleable.SetItemView_drawableStart);
                 if(drawableStart != null){
                     drawableStartWidth = ta.getDimensionPixelSize(
-                            R.styleable.SetItemView_drawableStartWidth,drawableStartWidth);
+                            R.styleable.SetItemView_drawableStartWidth,applyDimension(drawableStartWidth));
                     drawableStartHeight = ta.getDimensionPixelSize(
-                            R.styleable.SetItemView_drawableStartHeight,drawableStartHeight);
+                            R.styleable.SetItemView_drawableStartHeight,applyDimension(drawableStartHeight));
                 }
 
                 textStart = ta.getString(R.styleable.SetItemView_textStart);
@@ -428,7 +427,6 @@ public class SetItemView extends View {
      * 初始设置toggleButton的一些属性值
      */
     private void setToggleValue(){
-        Log.d(TAG, "setToggleValue: ");
         radius = Math.min(toggleWidth,toggleHeight) * 0.5f;
         centerY = radius;
         startX = centerY;
@@ -449,10 +447,8 @@ public class SetItemView extends View {
     private void assumeTextStartPaint(){
         if (mTextStartPaint == null){
             final Resources res = getResources();
-            final CompatibilityInfo compat = res.getCompatibilityInfo();
             mTextStartPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
             mTextStartPaint.density = res.getDisplayMetrics().density;
-            mTextStartPaint.setCompatibilityScaling(compat.applicationScale);
             mTextStartPaint.setTextSize(textStartSize);
             mTextStartPaint.setColor(textStartColor);
             mTextStartPaint.setAntiAlias(true);
@@ -466,10 +462,8 @@ public class SetItemView extends View {
 
         if (mTextEndPaint == null){
             final Resources res = getResources();
-            final CompatibilityInfo compat = res.getCompatibilityInfo();
             mTextEndPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
             mTextEndPaint.density = res.getDisplayMetrics().density;
-            mTextEndPaint.setCompatibilityScaling(compat.applicationScale);
             mTextEndPaint.setTextSize(textEndSize);
             mTextEndPaint.setColor(textEndColor);
             mTextEndPaint.setAntiAlias(true);
@@ -494,6 +488,24 @@ public class SetItemView extends View {
             togglePaint.setStrokeCap(Paint.Cap.ROUND);
             togglePaint.setAntiAlias(true);
         }
+    }
+
+    /**
+     * 设置textEnd字符显示
+     * @param textEnd
+     */
+    public void setTextEnd(String textEnd){
+        this.textEnd = textEnd;
+        invalidate();
+    }
+
+    /**
+     * 设置textEnd背景色
+     * @param color
+     */
+    public void setTextEndBackColor(int color){
+        this.textEndBackgroundColor = color;
+        invalidate();
     }
 
     /**
