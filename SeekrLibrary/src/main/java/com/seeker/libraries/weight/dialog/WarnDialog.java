@@ -16,7 +16,7 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.seeker.libraries.R;
-import com.seeker.libraries.util.DeviceUtil;
+import com.seeker.libraries.util.DeviceUtils;
 import java.io.Serializable;
 
 /**
@@ -106,8 +106,8 @@ public class WarnDialog extends DialogFragment implements View.OnClickListener{
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        final int deviceWidth = DeviceUtil.getDeviceWidth(getActivity());
-        final int deviceHeight = DeviceUtil.getDeviceHeight(getActivity());
+        final int deviceWidth = DeviceUtils.getDeviceWidth(getActivity());
+        final int deviceHeight = DeviceUtils.getDeviceHeight(getActivity());
         final int width = Math.min(deviceWidth,deviceHeight);
 
         Dialog dialog = getDialog();

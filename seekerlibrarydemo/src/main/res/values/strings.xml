@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">SeekerLibraryDemo</string>
-    
-    
+
+    <string name="SetItemView">SetItemView Demo</string>
     <string name="FinalRecycleView">FinalRecycleView Demo</string>
     <string name="emptyClues">击下方按钮刷新数据</string>
     <string name="OKHttpManger">OKHttpManger Demo</string>

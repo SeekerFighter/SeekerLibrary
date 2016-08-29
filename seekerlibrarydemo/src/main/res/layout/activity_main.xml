@@ -11,55 +11,52 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <com.seeker.libraries.weight.MenuItemView
-            android:id="@+id/finalRecycleDemo"
+        <com.seeker.libraries.weight.SetItemView
+            android:id="@+id/setItemViewDemo"
             android:background="@drawable/background_view_rounded_top"
-            style="@style/MenuItemStyle"
-            app:textHeader="@string/FinalRecycleView"/>
-        <com.seeker.libraries.weight.MenuItemView
+            style="@style/SetItemStyleBase"
+            app:textStart="@string/SetItemView"/>
+
+        <com.seeker.libraries.weight.SetItemView
+            android:id="@+id/finalRecycleDemo"
+            style="@style/SetItemStyleMiddle"
+            app:textStart="@string/FinalRecycleView"/>
+        <com.seeker.libraries.weight.SetItemView
             android:id="@+id/okhttpDemo"
-            android:background="@drawable/background_view_rounded_middle"
-            style="@style/MenuItemStyle"
-            app:textHeader="@string/OKHttpManger"/>
-        <com.seeker.libraries.weight.MenuItemView
+            style="@style/SetItemStyleMiddle"
+            app:textStart="@string/OKHttpManger"/>
+        <com.seeker.libraries.weight.SetItemView
             android:id="@+id/cropImageDemo"
-            android:background="@drawable/background_view_rounded_middle"
-            style="@style/MenuItemStyle"
-            app:textHeader="@string/CropImageView"/>
-        <com.seeker.libraries.weight.MenuItemView
+            style="@style/SetItemStyleMiddle"
+            app:textStart="@string/CropImageView"/>
+        <com.seeker.libraries.weight.SetItemView
             android:id="@+id/libDialogFragmentDemo"
-            android:background="@drawable/background_view_rounded_middle"
-            style="@style/MenuItemStyle"
-            app:textHeader="@string/LibDialogFragment"/>
-        <com.seeker.libraries.weight.MenuItemView
+            style="@style/SetItemStyleMiddle"
+            app:textStart="@string/LibDialogFragment"/>
+        <com.seeker.libraries.weight.SetItemView
             android:id="@+id/waitAdd3"
-            android:background="@drawable/background_view_rounded_middle"
-            style="@style/MenuItemStyle"
-            app:textHeader="Wait Add..."/>
-        <com.seeker.libraries.weight.MenuItemView
+            style="@style/SetItemStyleMiddle"
+            app:textStart="Wait Add..."/>
+        <com.seeker.libraries.weight.SetItemView
             android:id="@+id/waitAdd4"
-            android:background="@drawable/background_view_rounded_middle"
-            style="@style/MenuItemStyle"
-            app:textHeader="Wait Add..."/>
-        <com.seeker.libraries.weight.MenuItemView
+            style="@style/SetItemStyleMiddle"
+            app:textStart="Wait Add..."/>
+        <com.seeker.libraries.weight.SetItemView
             android:id="@+id/waitAdd5"
-            android:background="@drawable/background_view_rounded_middle"
-            style="@style/MenuItemStyle"
-            app:textHeader="Wait Add..."/>
-        <com.seeker.libraries.weight.MenuItemView
+            style="@style/SetItemStyleMiddle"
+            app:textStart="Wait Add..."/>
+        <com.seeker.libraries.weight.SetItemView
             android:id="@+id/waitAdd6"
-            android:background="@drawable/background_view_rounded_middle"
-            style="@style/MenuItemStyle"
-            app:textHeader="Wait Add..."/>
-        <com.seeker.libraries.weight.MenuItemView
+            style="@style/SetItemStyleMiddle"
+            app:textStart="Wait Add..."/>
+        <com.seeker.libraries.weight.SetItemView
             android:id="@+id/waitAdd7"
-            android:background="@drawable/background_view_rounded_middle"
-            style="@style/MenuItemStyle"
-            app:textHeader="Wait Add..."/>
-        <com.seeker.libraries.weight.MenuItemView
+            style="@style/SetItemStyleMiddle"
+            app:textStart="Wait Add..."/>
+        <com.seeker.libraries.weight.SetItemView
             android:id="@+id/waitAdd8"
             android:background="@drawable/background_view_rounded_bottom"
-            style="@style/MenuItemStyle"
-            app:textHeader="Wait Add..."/>
+            style="@style/SetItemStyleBase"
+            app:textStart="Wait Add..."/>
     </TableLayout>
 </com.seeker.libraries.weight.ElasticNestedScrollView>

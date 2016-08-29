@@ -13,13 +13,12 @@ public final class Validate {
 
     /**
      * check object null,if null throw NullPointerException
-     * @param location where use this function
      * @param arg check null
      * @param name arg name
      */
-    public static void notNull(String location,Object arg, String name) {
+    public static void notNull(Object arg, String name) {
         if (arg == null) {
-            throw new NullPointerException("At "+location+",Argument '" + name + "' cannot be null.");
+            throw new NullPointerException("Argument '" + name + "' cannot be null.");
         }
     }
 
