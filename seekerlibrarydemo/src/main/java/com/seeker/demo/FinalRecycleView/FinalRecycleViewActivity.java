@@ -5,8 +5,8 @@ import android.widget.Toast;
 
 import com.seeker.demo.R;
 import com.seeker.libraries.base.BaseActivity;
-import com.seeker.libraries.weight.recycleView.FinalRecycleView;
-import com.seeker.libraries.weight.recycleView.CheckItemTouchListener;
+import com.seeker.libraries.widget.recycleView.FinalRecycleView;
+import com.seeker.libraries.widget.recycleView.CheckItemTouchListener;
 
 import java.util.ArrayList;
 import butterknife.BindView;

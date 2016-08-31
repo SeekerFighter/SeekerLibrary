@@ -10,7 +10,7 @@ import java.io.IOException;
  * 文件操作工具类
  */
 
-public class FileUtils {
+public final class FileUtils {
 
     /**
      * 是否挂载sd卡

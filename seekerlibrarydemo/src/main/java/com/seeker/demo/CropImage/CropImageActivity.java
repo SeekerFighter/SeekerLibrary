@@ -9,7 +9,7 @@ import com.seeker.demo.R;
 import com.seeker.libraries.base.BaseActivity;
 import com.seeker.libraries.logger.Logger;
 import com.seeker.libraries.util.AppUtils;
-import com.seeker.libraries.weight.cropView.CropImageView;
+import com.seeker.libraries.widget.cropView.CropImageView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -77,10 +77,10 @@ public class CropImageActivity extends BaseActivity{
     public void btnClick(View view){
         switch (view.getId()){
             case R.id.takePic:
-                AppUtils.takePicture(this,null,CAMERA);
+                AppUtils.openCamera(this,null,CAMERA);
                 break;
             case R.id.album:
-                AppUtils.openAlbumPicture(this,ALBUM);
+                AppUtils.openAlbum(this,ALBUM);
                 break;
             case R.id.crop:
                 Bitmap b = cropImageView.getCroppedImage();

@@ -4,7 +4,7 @@ import android.graphics.Color;
 import android.widget.Toast;
 import com.seeker.demo.R;
 import com.seeker.libraries.base.BaseActivity;
-import com.seeker.libraries.weight.SetItemView;
+import com.seeker.libraries.widget.SetItemView;
 
 /**
  * Created by Seeker on 2016/8/29.

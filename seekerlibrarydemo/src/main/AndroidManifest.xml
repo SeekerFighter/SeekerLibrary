@@ -41,6 +41,10 @@
             android:label="@string/LibDialogFragment"
             android:screenOrientation="portrait"/>
 
+        <activity android:name=".LazyFragmetn.LazyFragmentActivity"
+            android:label="@string/LazyFragment"
+            android:screenOrientation="portrait"/>
+
     </application>
 
 </manifest>

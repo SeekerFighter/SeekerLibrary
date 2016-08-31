@@ -5,10 +5,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.seeker.demo.R;
 import com.seeker.libraries.base.BaseActivity;
-import com.seeker.libraries.util.AdvancedCountdownTimer;
-import com.seeker.libraries.weight.dialog.LoadDialog;
-import com.seeker.libraries.weight.dialog.WarnDialog;
-
+import com.seeker.libraries.os.AdvancedCountdownTimer;
+import com.seeker.libraries.widget.dialog.LoadDialog;
+import com.seeker.libraries.widget.dialog.WarnDialog;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
