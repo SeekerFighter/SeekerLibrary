@@ -28,7 +28,7 @@ import java.io.IOException;
  *
  * 图片操作
  */
-public class ImageUtils {
+public final class ImageUtils {
 
     /**
      * drawable图片转成bitmap图片

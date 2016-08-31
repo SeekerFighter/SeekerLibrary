@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.seeker.libraries.weight.SetItemView
+    <com.seeker.libraries.widget.SetItemView
         style="@style/SetItemStyleBase"
         android:background="@color/white"
         app:drawableStart="@drawable/option1"
@@ -13,13 +13,10 @@
         app:textStart="个性化"
         />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.33dp"
-        android:background="@color/divider"/>
+    <include layout="@layout/devider"/>
     
     
-    <com.seeker.libraries.weight.SetItemView
+    <com.seeker.libraries.widget.SetItemView
         style="@style/SetItemStyleBase"
         android:background="@color/white"
         app:drawableStart="@drawable/option2"
@@ -31,12 +28,9 @@
         app:textStartSize="20sp"
         />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.33dp"
-        android:background="@color/divider"/>
+    <include layout="@layout/devider"/>
 
-    <com.seeker.libraries.weight.SetItemView
+    <com.seeker.libraries.widget.SetItemView
         style="@style/SetItemStyleBase"
         android:background="@color/white"
         app:drawableStart="@drawable/option3"
@@ -48,12 +42,9 @@
         app:arrowHeight="14dp"
         />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.33dp"
-        android:background="@color/divider"/>
+    <include layout="@layout/devider"/>
 
-    <com.seeker.libraries.weight.SetItemView
+    <com.seeker.libraries.widget.SetItemView
         style="@style/SetItemStyleBase"
         android:background="@color/white"
         app:drawableStart="@drawable/option4"
@@ -66,12 +57,9 @@
         app:areaColor="@color/colorAccent"
         />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.33dp"
-        android:background="@color/divider"/>
+    <include layout="@layout/devider"/>
 
-    <com.seeker.libraries.weight.SetItemView
+    <com.seeker.libraries.widget.SetItemView
         android:id="@+id/supportKa"
         style="@style/SetItemStyleBase"
         android:background="@color/white"
@@ -82,12 +70,9 @@
         app:defaultOn="false"
         />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.33dp"
-        android:background="@color/divider"/>
+    <include layout="@layout/devider"/>
 
-    <com.seeker.libraries.weight.SetItemView
+    <com.seeker.libraries.widget.SetItemView
         style="@style/SetItemStyleBase"
         android:background="@color/white"
         app:drawableStart="@drawable/option6"
@@ -97,12 +82,9 @@
         app:textEndColor="@color/divider"
         />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.33dp"
-        android:background="@color/divider"/>
+    <include layout="@layout/devider"/>
 
-    <com.seeker.libraries.weight.SetItemView
+    <com.seeker.libraries.widget.SetItemView
         android:id="@+id/updateVsersion"
         style="@style/SetItemStyleBase"
         android:background="@drawable/click_back"

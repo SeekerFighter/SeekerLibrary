@@ -1,11 +1,10 @@
 package com.seeker.demo.FinalRecycleView;
 
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import com.seeker.demo.R;
-import com.seeker.libraries.weight.recycleView.BaseRecyleAdapter;
-import com.seeker.libraries.weight.recycleView.BaseViewHolder;
+import com.seeker.libraries.widget.recycleView.BaseRecyleAdapter;
+import com.seeker.libraries.widget.recycleView.BaseViewHolder;
 
 import java.util.List;
 

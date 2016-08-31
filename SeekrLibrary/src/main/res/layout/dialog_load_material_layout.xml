@@ -7,7 +7,7 @@
     android:background="@drawable/background_round_corner"
     android:padding="@dimen/loadViewMargin">
 
-    <com.seeker.libraries.weight.progressView.LoadMaterialView
+    <com.seeker.libraries.widget.progressView.LoadMaterialView
         android:id="@id/dialogLoadView"
         android:layout_width="@dimen/loadViewSize"
         android:layout_height="@dimen/loadViewSize" />

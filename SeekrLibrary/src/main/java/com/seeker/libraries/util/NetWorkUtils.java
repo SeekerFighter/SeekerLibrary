@@ -38,7 +38,7 @@ public final class NetWorkUtils {
      * 打开网络设置界面
      * @param context
      */
-    public static void openNetworkSetPager(Context context){
+    public static void openNetworkPager(Context context){
         Validate.notNull(context,"context");
         Intent intent = new Intent();
         if (Build.VERSION.SDK_INT > 10){

@@ -2,11 +2,11 @@ package com.seeker.libraries.base;
 
 import android.content.ComponentName;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import com.seeker.libraries.util.ActivityManger;
 
 /**
  * Created by Seeker on 2016/7/21.
@@ -15,10 +15,13 @@ public abstract class BaseActivity extends AppCompatActivity{
 
     public static final int DEFAULT_INTENT_FLAGS = -1;
 
+    public ActivityManger activityManger = ActivityManger.getInstance();
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
+        activityManger.addThisActivity(this);
         onbind();
         doWork();
     }
@@ -34,6 +37,7 @@ public abstract class BaseActivity extends AppCompatActivity{
     protected void onDestroy() {
         unbind();
         onRelease();
+        activityManger.removeThisActivity(this);
         super.onDestroy();
     }
 
