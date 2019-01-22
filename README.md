@@ -1,6 +1,6 @@
 # SeekerLibrary
 
-已废弃，迁移到LuckyAndroidDemo(https://github.com/SeekerFighter/LuckyAndroidDemo)
+[已废弃，迁移到LuckyAndroidDemo](https://github.com/SeekerFighter/LuckyAndroidDemo)
 
 
 
