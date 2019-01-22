@@ -1,5 +1,23 @@
 # SeekerLibrary
 
+已废弃，迁移到LuckyAndroidDemo(https://github.com/SeekerFighter/LuckyAndroidDemo)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Seeker开发依赖库，包含以下内容：
 
 1.FinalRecycleView
